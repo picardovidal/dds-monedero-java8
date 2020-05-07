@@ -1,0 +1,13 @@
+code smells detectados
+Misplaced methods
+el metodo agregateA del Movimiento, solo hace uso del metodo calcular valor, que a su vez también es un ejemplo de misplaced methods 
+
+Data Clumps
+el metodo agregarMovimiento de la cuenta recibe los datos del movimiento disgregados, cuando puede recibir el movimiento directamente
+
+Duplicated code
+Las funciones esDeposito y esExtraccion podrian resumirse en un solo metodo, esDeposito si el metodo devuelve falso asumimos que es una extraccion
+
+
+getMontoExtraidoA utiliza para filtrar los movimientos dos metodos de la clase movimiento cuando puede utilizar directamente el metodo fueExtraido, asi es mas claro lo que se esta queriendo filtrar
+
