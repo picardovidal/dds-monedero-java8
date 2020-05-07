@@ -28,7 +28,7 @@ public class Movimiento {
   }
 
   public boolean fueExtraido(LocalDate fecha) {
-    return isExtraccion() && esDeLaFecha(fecha);
+    return !isDeposito() && esDeLaFecha(fecha);
   }
 
   public boolean esDeLaFecha(LocalDate fecha) {
@@ -38,10 +38,5 @@ public class Movimiento {
   public boolean isDeposito() {
     return esDeposito;
   }
-
-  public boolean isExtraccion() {
-    return !esDeposito;
-  }
-
   
 }
