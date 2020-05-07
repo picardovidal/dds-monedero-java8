@@ -2,6 +2,10 @@ package dds.monedero.model;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,4 +68,13 @@ public class MonederoTest {
     cuenta.sacar(-500);
   }
 
+  @Test
+  public void setMovimientos() {
+	  List<Movimiento> movimientos = new ArrayList<>();
+	  movimientos.add( new Movimiento(LocalDate.now(), 1500, true));
+	  movimientos.add( new Movimiento(LocalDate.now(), 263, true));
+	  cuenta.setMovimientos(movimientos);
+    
+    assertEquals(cuenta.getMovimientos().stream().count(),2);
+  }
 }

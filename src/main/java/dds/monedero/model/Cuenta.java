@@ -35,7 +35,7 @@ public class Cuenta {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
-    agregarMovimiento(LocalDate.now(), cuanto, true);
+    agregarMovimiento(new Movimiento(LocalDate.now(), cuanto, true));
   }
 
   public void sacar(double cuanto) {
@@ -51,16 +51,15 @@ public class Cuenta {
       throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
           + " diarios, límite: " + limite);
     }
-    agregarMovimiento(LocalDate.now(), cuanto, false);
+    agregarMovimiento(new Movimiento(LocalDate.now(), cuanto, false));
   }
 
-  public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {	 
-    Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
+  public void agregarMovimiento(Movimiento movimiento) {	 
     movimientos.add(movimiento);
-    if (esDeposito) {
-    	saldo += cuanto;
+    if (movimiento.isDeposito()) {
+    	saldo += movimiento.getMonto();
       } else {
-    	saldo -= cuanto;
+    	saldo -= movimiento.getMonto();
       }
   }
 
