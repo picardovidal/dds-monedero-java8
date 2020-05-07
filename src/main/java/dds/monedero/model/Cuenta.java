@@ -11,15 +11,13 @@ import dds.monedero.exceptions.SaldoMenorException;
 
 public class Cuenta {
 
-  private double saldo = 0;
   private List<Movimiento> movimientos = new ArrayList<>();
 
   public Cuenta() {
-    saldo = 0;
   }
 
   public Cuenta(double montoInicial) {
-    saldo = montoInicial;
+    poner(montoInicial);
   }
 
   public void setMovimientos(List<Movimiento> movimientos) {
@@ -56,11 +54,6 @@ public class Cuenta {
 
   public void agregarMovimiento(Movimiento movimiento) {	 
     movimientos.add(movimiento);
-    if (movimiento.isDeposito()) {
-    	saldo += movimiento.getMonto();
-      } else {
-    	saldo -= movimiento.getMonto();
-      }
   }
 
   public double getMontoExtraidoA(LocalDate fecha) {
@@ -75,12 +68,15 @@ public class Cuenta {
   }
 
   public double getSaldo() {
-    return saldo;
+	  double debe = getMovimientos().stream()
+		        .filter(movimiento -> movimiento.isDeposito())
+		        .mapToDouble(Movimiento::getMonto)
+		        .sum();
+	  double haber = getMovimientos().stream()
+		        .filter(movimiento -> !movimiento.isDeposito())
+		        .mapToDouble(Movimiento::getMonto)
+		        .sum();
+    return debe-haber;
   }
-
-  public void setSaldo(double saldo) {
-    this.saldo = saldo;
-  }
-
   
 }

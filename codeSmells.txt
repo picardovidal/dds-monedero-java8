@@ -11,3 +11,5 @@ Las funciones esDeposito y esExtraccion podrian resumirse en un solo metodo, esD
 
 getMontoExtraidoA utiliza para filtrar los movimientos dos metodos de la clase movimiento cuando puede utilizar directamente el metodo fueExtraido, asi es mas claro lo que se esta queriendo filtrar
 
+
+El saldo hoy se persiste y podría ser calculado con movimientos, este cambio asume que toda entrada a la cuenta es un movimiento y se cambia los seteos iniciales de saldo por movimientos. (no se bien en que code smell ubicar esto, podría ser Temporary field)
